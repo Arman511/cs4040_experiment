@@ -1,0 +1,56 @@
+{
+  "generator": "scripts/generate_test_data.py",
+  "seed": 42,
+  "input_sizes": {
+    "factorial": [
+      10,
+      50,
+      100,
+      250,
+      500,
+      800
+    ],
+    "tree": [
+      100,
+      500,
+      1000,
+      5000,
+      10000,
+      50000
+    ],
+    "merge_sort": [
+      100,
+      500,
+      1000,
+      5000,
+      10000,
+      50000
+    ]
+  },
+  "datasets": {
+    "factorial.csv": {
+      "sha256": "6fe66f2652144eabc9107cfeac5fc713522d22cc274852c711ab2b0258f3a800",
+      "bytes": 31
+    },
+    "ans_factorial.csv": {
+      "sha256": "95ed99dc45f7c9da925e775eb2ecfe5a9c9a219f9a08d531e263d74349fe9c5d",
+      "bytes": 101
+    },
+    "tree.csv": {
+      "sha256": "0c27dce515d6c761b290947e794d674461a10f74472d1b72fbf3d2b9ad6bb9cf",
+      "bytes": 446819
+    },
+    "ans_tree.csv": {
+      "sha256": "9c883271767e9de0456b2e36224a79d3d8b4388ea9a6dab80b80b4391e6b7356",
+      "bytes": 446819
+    },
+    "merge_sort.csv": {
+      "sha256": "d4dab899303adbb2e66ed0895883f1fd9fde65674c2811969ed1f7962bf53534",
+      "bytes": 425515
+    },
+    "ans_merge_sort.csv": {
+      "sha256": "4333dc63acd00ca19b773cd6f6a56166e9229991bd68e2e566683d68286857be",
+      "bytes": 425515
+    }
+  }
+}

@@ -76,16 +76,25 @@ public final class Algorithms {
 
     public static int[] mergeIterative(int[] input) {
         int[] a = input.clone();
-        for (int width = 1; width < a.length; width *= 2) {
-            int[] next = new int[a.length];
-            for (int start = 0; start < a.length; start += 2 * width) {
-                int mid = Math.min(start + width, a.length), end = Math.min(start + 2 * width, a.length);
-                int[] left = Arrays.copyOfRange(a, start, mid);
-                int[] right = Arrays.copyOfRange(a, mid, end);
-                int[] merged = merge(left, right);
-                System.arraycopy(merged, 0, next, start, merged.length);
+        record Frame(int start, int end, boolean childrenSorted) {
+        }
+        Deque<Frame> stack = new ArrayDeque<>();
+        stack.push(new Frame(0, a.length, false));
+        while (!stack.isEmpty()) {
+            Frame frame = stack.pop();
+            if (frame.end - frame.start <= 1)
+                continue;
+            int mid = (frame.start + frame.end) / 2;
+            if (!frame.childrenSorted) {
+                stack.push(new Frame(frame.start, frame.end, true));
+                stack.push(new Frame(mid, frame.end, false));
+                stack.push(new Frame(frame.start, mid, false));
+                continue;
             }
-            a = next;
+            int[] left = Arrays.copyOfRange(a, frame.start, mid);
+            int[] right = Arrays.copyOfRange(a, mid, frame.end);
+            int[] merged = merge(left, right);
+            System.arraycopy(merged, 0, a, frame.start, merged.length);
         }
         return a;
     }

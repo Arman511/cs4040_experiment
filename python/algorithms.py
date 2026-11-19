@@ -52,15 +52,18 @@ def merge_sort_recursive(values):
 
 def merge_sort_iterative(values):
     result = values[:]
-    width = 1
-    while width < len(result):
-        merged = []
-        for start in range(0, len(result), 2 * width):
-            left = result[start : start + width]
-            right = result[start + width : start + 2 * width]
-            merged.extend(merge(left, right))
-        result = merged
-        width *= 2
+    stack = [(0, len(result), False)]
+    while stack:
+        start, end, children_sorted = stack.pop()
+        if end - start <= 1:
+            continue
+        mid = (start + end) // 2
+        if not children_sorted:
+            stack.append((start, end, True))
+            stack.append((mid, end, False))
+            stack.append((start, mid, False))
+            continue
+        result[start:end] = merge(result[start:mid], result[mid:end])
     return result
 
 

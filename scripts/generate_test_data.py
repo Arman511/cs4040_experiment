@@ -1,4 +1,5 @@
 import csv
+import hashlib
 import json
 import math
 import random
@@ -7,6 +8,14 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "test_data"
 SEED = 42
+DATASET_FILES = (
+    "factorial.csv",
+    "ans_factorial.csv",
+    "tree.csv",
+    "ans_tree.csv",
+    "merge_sort.csv",
+    "ans_merge_sort.csv",
+)
 
 
 def write_csv(name, header, rows):
@@ -48,6 +57,33 @@ def generate_answers():
         write_csv(f"ans_{algorithm}.csv", [size_field, "result_json"], answers)
 
 
+def write_manifest():
+    datasets = {}
+    for name in DATASET_FILES:
+        path = OUT / name
+        datasets[name] = {
+            "sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
+            "bytes": path.stat().st_size,
+        }
+    (OUT / "manifest.json").write_text(
+        json.dumps(
+            {
+                "generator": "scripts/generate_test_data.py",
+                "seed": SEED,
+                "input_sizes": {
+                    "factorial": [10, 50, 100, 250, 500, 800],
+                    "tree": [100, 500, 1000, 5000, 10000, 50000],
+                    "merge_sort": [100, 500, 1000, 5000, 10000, 50000],
+                },
+                "datasets": datasets,
+            },
+            indent=2,
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+
+
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
     rng = random.Random(SEED)
@@ -70,6 +106,7 @@ def main():
     write_csv("merge_sort.csv", ["size", "values_json"], merge_rows)
 
     generate_answers()
+    write_manifest()
     print(f"Generated shared datasets in {OUT}")
 
 

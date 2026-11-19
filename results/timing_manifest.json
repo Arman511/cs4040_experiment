@@ -1,0 +1,100 @@
+{
+  "run_id": "20261119T002227Z-a42b12eb",
+  "benchmark_type": "timing",
+  "started_at_utc": "2026-11-19T00:22:27.830365+00:00",
+  "git_commit": "f43133e46611391a34a1bf6f0a67ba56cbd09c38",
+  "git_worktree_dirty": true,
+  "platform": {
+    "platform": "Linux-6.18.58.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "machine": "x86_64",
+    "processor": "x86_64",
+    "cpu_count": 20
+  },
+  "languages": [
+    "python",
+    "rust",
+    "java"
+  ],
+  "algorithms": [
+    "factorial",
+    "tree",
+    "merge_sort"
+  ],
+  "modes": [
+    "recursive",
+    "iterative"
+  ],
+  "repetitions": 100,
+  "execution_order": {
+    "randomised_within_repetition": true,
+    "seed": 2026
+  },
+  "build_settings": {
+    "python": "no optimisation flags; operation timers exclude process startup",
+    "java": "Maven compiler release 25; JVM process reused across measurements",
+    "rust": "cargo build --release; operation timers exclude process startup",
+    "java_warmup": {
+      "maximum_batches": 100,
+      "minimum_batches": 5,
+      "batch_size": 100,
+      "relative_spread_threshold": 0.15,
+      "criterion": "relative spread <= threshold after excluding the largest sample when at least five samples exist, and total compilation time is unchanged across the stability window"
+    }
+  },
+  "runtimes": {
+    "python": {
+      "executable": ".venv/bin/python",
+      "version": "3.15.2",
+      "implementation": "CPython"
+    },
+    "java": {
+      "java": "openjdk version \"25.0.5.0.3\" 2026-10-24\nOpenJDK Runtime Environment (build 25.0.5.0.3+1-1-24.04.1-Ubuntu)\nOpenJDK 64-Bit Server VM (build 25.0.5.0.3+1-1-24.04.1-Ubuntu, mixed mode, sharing)",
+      "javac": "javac 25.0.5.0.3",
+      "maven": "Apache Maven 3.8.7",
+      "compiler_release": "25",
+      "optimisation": "JIT; warm-up required before measurement"
+    },
+    "rust": {
+      "rustc": "rustc 1.100.0 (0ef1bc386 2026-11-09)",
+      "cargo": "cargo 1.100.0 (3acc79c0c 2026-11-05)",
+      "profile": "release",
+      "optimisation": "cargo --release"
+    }
+  },
+  "datasets": {
+    "factorial.csv": {
+      "path": "test_data/factorial.csv",
+      "sha256": "6fe66f2652144eabc9107cfeac5fc713522d22cc274852c711ab2b0258f3a800",
+      "bytes": 31
+    },
+    "ans_factorial.csv": {
+      "path": "test_data/ans_factorial.csv",
+      "sha256": "95ed99dc45f7c9da925e775eb2ecfe5a9c9a219f9a08d531e263d74349fe9c5d",
+      "bytes": 101
+    },
+    "tree.csv": {
+      "path": "test_data/tree.csv",
+      "sha256": "0c27dce515d6c761b290947e794d674461a10f74472d1b72fbf3d2b9ad6bb9cf",
+      "bytes": 446819
+    },
+    "ans_tree.csv": {
+      "path": "test_data/ans_tree.csv",
+      "sha256": "9c883271767e9de0456b2e36224a79d3d8b4388ea9a6dab80b80b4391e6b7356",
+      "bytes": 446819
+    },
+    "merge_sort.csv": {
+      "path": "test_data/merge_sort.csv",
+      "sha256": "d4dab899303adbb2e66ed0895883f1fd9fde65674c2811969ed1f7962bf53534",
+      "bytes": 425515
+    },
+    "ans_merge_sort.csv": {
+      "path": "test_data/ans_merge_sort.csv",
+      "sha256": "4333dc63acd00ca19b773cd6f6a56166e9229991bd68e2e566683d68286857be",
+      "bytes": 425515
+    }
+  },
+  "configuration_count": 108,
+  "measurement_count": 10800,
+  "expected_measurement_count": 10800,
+  "finished_at_utc": "2026-11-19T00:26:18.280140+00:00"
+}

@@ -80,15 +80,20 @@ fn merge_recursive(a: &[i64]) -> Vec<i64> {
 }
 fn merge_iterative(a: &[i64]) -> Vec<i64> {
     let mut v = a.to_vec();
-    let mut width = 1;
-    while width < v.len() {
-        let mut next = Vec::with_capacity(v.len());
-        for chunk in v.chunks(2 * width) {
-            let mid = width.min(chunk.len());
-            next.extend(merge(&chunk[..mid], &chunk[mid..]));
+    let mut stack = vec![(0, v.len(), false)];
+    while let Some((start, end, children_sorted)) = stack.pop() {
+        if end - start <= 1 {
+            continue;
         }
-        v = next;
-        width *= 2;
+        let mid = (start + end) / 2;
+        if !children_sorted {
+            stack.push((start, end, true));
+            stack.push((mid, end, false));
+            stack.push((start, mid, false));
+            continue;
+        }
+        let merged = merge(&v[start..mid], &v[mid..end]);
+        v[start..end].copy_from_slice(&merged);
     }
     v
 }

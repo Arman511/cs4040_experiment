@@ -6,8 +6,8 @@ time_data <- read.csv("results/time_usage.csv")
 memory_data <- read.csv("results/memory_usage.csv")
 snapshots <- read.csv("results/memory_snapshots.csv")
 
-time_data <- mutate(time_data, elapsed_ms = elapsed_ns / 1e6)
-memory_data <- mutate(memory_data, peak_mib = peak_bytes / 1024^2)
+time_data <- mutate(time_data, elapsed_ms = execution_time_ns / 1e6)
+memory_data <- mutate(memory_data, peak_mib = peak_memory_bytes / 1024^2)
 
 for (directory in c("analysis/tables", "analysis/figures")) {
   dir.create(directory, recursive = TRUE, showWarnings = FALSE)
@@ -96,7 +96,7 @@ writeLines(
   "analysis/tables/execution_time_results.tex"
 )
 
-memory_tests <- compare_by_group(memory_data, "peak_bytes") |>
+memory_tests <- compare_by_group(memory_data, "peak_memory_bytes") |>
   mutate(p_holm = p.adjust(p_value, method = "holm"))
 
 snapshot_tests <- compare_by_group(snapshot_run_means, "mean_mib") |>
@@ -110,6 +110,11 @@ write.csv(
   row.names = FALSE
 )
 
+write.csv(
+  snapshot_tests,
+  "analysis/tables/h1_snapshot_tests.csv",
+  row.names = FALSE
+)
 
 algorithm_interactions <- time_data |>
   group_by(algorithm) |>

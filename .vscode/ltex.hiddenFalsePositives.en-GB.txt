@@ -1,0 +1,4 @@
+{"rule":"OXFORD_SPELLING_Z_NOT_S","sentence":"^\\QBoth use a fixed seed of \\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-|Atrapa-|Dummy\\+|Dummy's\\+)[0-9]+\\Q to randomise configuration run order.\\E$"}
+{"rule":"ENGLISH_WORD_REPEAT_BEGINNING_RULE","sentence":"^\\QVisit the right subtree.\\E$"}
+{"rule":"ALL_OF_THE","sentence":"^\\QAll implementation must meet all of the following:\\E$"}
+{"rule":"ENGLISH_WORD_REPEAT_BEGINNING_RULE","sentence":"^\\QTraverse the right subtree.\\E$"}
